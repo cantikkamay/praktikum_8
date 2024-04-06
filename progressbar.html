@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download Dialog dengan ProgressBar</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+</head>
+<body>
+
+<button id="downloadButton">Mulai Download</button>
+
+<div id="downloadDialog" title="Proses Download">
+    <p>Sedang mengunduh...</p>
+    <div id="progressbar"></div>
+</div>
+
+<script>
+    $(document).ready(function(){
+        $("#downloadDialog").dialog({
+            autoOpen: false,
+            modal: true,
+            resizable: false,
+            closeOnEscape: false,
+            open: function(event, ui) {
+                $(".ui-dialog-titlebar-close").hide();
+            }
+        });
+
+        $("#downloadButton").click(function(){
+            $("#downloadDialog").dialog("open");
+            var progressbar = $("#progressbar");
+            var progressLabel = $("<div>").appendTo(progressbar);
+            progressbar.progressbar({
+                value: false,
+                change: function() {
+                    progressLabel.text(progressbar.progressbar("value") + "%");
+                },
+                complete: function() {
+                    progressLabel.text("Selesai!");
+                }
+            });
+
+            var value = 0;
+            function progress() {
+                value += Math.floor(Math.random() * 10);
+                progressbar.progressbar("value", value);
+                if (value < 100) {
+                    setTimeout(progress, 1000);
+                }
+            }
+            setTimeout(progress, 1000);
+        });
+    });
+</script>
+
+</body>
+</html>

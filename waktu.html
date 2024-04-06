@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Jam Real-Time</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        #clock {
+            font-size: 32px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Jam</h1>
+    <div id="clock"></div>
+
+    <script>
+        function updateClock() {
+            var now = new Date();
+            var date = now.toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+            var time = now.toLocaleTimeString('id-ID');
+
+            document.getElementById('clock').innerHTML = '<strong>Tanggal:</strong> ' + date + '<br><br><strong>Waktu:</strong> ' + time;
+        }
+
+        setInterval(updateClock, 1000);
+
+        updateClock();
+    </script>
+</body>
+</html>

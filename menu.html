@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Navigasi dengan Kotak</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div id="menu">
+        <a href="#" class="active">Beranda</a>
+        <a href="#">Tentang</a>
+        <a href="#">Layanan</a>
+        <a href="#">Kontak</a>
+    </div>
+
+    <script>
+        $(document).ready(function(){
+            $("#menu a").each(function(){
+                var words = $(this).text().split(" ");
+                var html = "";
+                $.each(words, function(index, value){
+                    html += "<span style='display: inline-block; border: 1px solid black; padding: 5px 10px; margin-right: 5px;'>" + value + "</span>";
+                });
+                $(this).html(html);
+            });
+
+            // Atur event handler untuk setiap link
+            $("#menu a").click(function(){
+                $("#menu a").removeClass("active");
+                $(this).addClass("active");
+            });
+        });
+    </script>
+</body>
+</html>
